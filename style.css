@@ -1,0 +1,107 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 25px 15px;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px #0000000d;
+}
+
+h1 {
+    color: #2563eb;
+    margin-bottom: 8px;
+}
+
+#studentForm {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 25px 0;
+}
+
+input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+#studentForm input[type="hidden"] {
+    display: none;
+}
+
+button {
+    padding: 11px 14px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#search {
+    margin: 10px 0;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+th {
+    background: #eff6ff;
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+#message {
+    color: #15803d;
+}
+
+@media (max-width: 650px) {
+    #studentForm {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 16px;
+    }
+}
