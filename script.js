@@ -154,3 +154,56 @@ searchInput.addEventListener("input", () => {
 
 // Load saved data when opening the page
 displayStudents();
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const status = document.getElementById("formStatus");
+    const sendBtn = document.getElementById("sendBtn");
+
+    if (!name || !message) {
+      status.textContent = "Please enter your name and message.";
+      return;
+    }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending...";
+    status.textContent = "";
+
+    try {
+      const response = await fetch(
+        "https://student-telegram-api.horm20766.workers.dev",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name, message })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to send message.");
+      }
+
+      status.textContent = "Message sent successfully!";
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("Contact form error:", error);
+      status.textContent =
+        "Could not send your message. Please try again.";
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send Message";
+    }
+  });
+}
+

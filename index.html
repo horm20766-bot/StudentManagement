@@ -55,3 +55,36 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p>Send me a message through my website.</p>
+
+  <form id="contactForm">
+    <div>
+      <label for="name">Your Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+        maxlength="100"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="message">Your Message</label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Write your message..."
+        maxlength="2000"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" id="sendBtn">Send Message</button>
+    <p id="formStatus" role="status" aria-live="polite"></p>
+  </form>
+</section>
