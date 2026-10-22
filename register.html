@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - StudentHub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #f1f5f9;
+            font-family: Arial, sans-serif;
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            padding: 32px;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 12px 40px #0f172a12;
+        }
+        .auth-logo {
+            display: grid;
+            place-items: center;
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: #2563eb;
+            color: white;
+            font-size: 27px;
+            font-weight: bold;
+        }
+        h1 { margin-bottom: 8px; color: #0f172a; }
+        .subtitle { margin-bottom: 26px; color: #64748b; }
+        .auth-field { margin-bottom: 18px; }
+        .auth-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+        }
+        .auth-field input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 16px;
+        }
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .auth-button:disabled { opacity: .65; cursor: wait; }
+        .auth-message { min-height: 22px; font-size: 14px; }
+        .auth-links { margin-top: 20px; text-align: center; }
+        .auth-links a { color: #2563eb; text-decoration: none; }
+        .auth-help { color: #64748b; font-size: 12px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <main class="auth-card">
+        <div class="auth-logo">S</div>
+        <h1>Create account</h1>
+        <p class="subtitle">Register a new StudentHub user account.</p>
+
+        <form id="registerForm">
+            <div class="auth-field">
+                <label for="username">Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    autocomplete="username"
+                    minlength="3"
+                    maxlength="30"
+                    pattern="[A-Za-z0-9_.-]+"
+                    title="Use letters, numbers, periods, underscores or hyphens."
+                    required
+                >
+            </div>
+
+            <div class="auth-field">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="10"
+                    maxlength="128"
+                    required
+                >
+            </div>
+
+            <div class="auth-field">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="10"
+                    maxlength="128"
+                    required
+                >
+            </div>
+
+            <button class="auth-button" id="registerButton" type="submit">
+                Create Account
+            </button>
+
+            <p class="auth-message" id="authMessage" role="status"></p>
+        </form>
+
+        <p class="auth-links">
+            Already registered?
+            <a href="login.html">Sign in</a>
+        </p>
+
+        <p class="auth-help">
+            New accounts receive the regular user role.
+            Admin access cannot be selected during registration.
+        </p>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>

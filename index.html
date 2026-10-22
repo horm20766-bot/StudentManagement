@@ -4,87 +4,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management</title>
+
+    <title>StudentHub - Student Management Dashboard</title>
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Manage student records with StudentHub.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Student Management</h1>
-        <p>Manage your student information</p>
 
-        <form id="studentForm">
-            <input type="hidden" id="studentId">
+<div class="app-layout">
 
-            <input type="text" id="name"
-                   placeholder="Student Name" required>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <a href="#dashboard" class="brand">
+            <span class="brand-icon">S</span>
+            <span>Student<span class="brand-light">Hub</span></span>
+        </a>
 
-            <input type="number" id="age"
-                   placeholder="Age" min="1" max="120" required>
+        <p class="nav-label">MAIN MENU</p>
 
-            <input type="text" id="major"
-                   placeholder="Major" required>
+        <nav class="side-nav">
+            <a href="#dashboard" class="nav-link active">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
 
-            <button type="submit" id="submitBtn">
-                Add Student
-            </button>
-        </form>
+            <a href="#students" class="nav-link">
+                <span class="nav-icon">♙</span>
+                <span>Students</span>
+            </a>
 
-        <input type="search" id="search"
-               placeholder="Search students...">
+            <a href="#contact" class="nav-link">
+                <span class="nav-icon">✉</span>
+                <span>Messages</span>
+            </a>
 
-        <p id="count">Total Students: 0</p>
+            <a href="#reports" class="nav-link">
+                <span class="nav-icon">▥</span>
+                <span>Reports</span>
+            </a>
+        </nav>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Major</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="studentList"></tbody>
-            </table>
+        <div class="sidebar-bottom">
+            <p class="nav-label">PREFERENCES</p>
+
+            <a href="#contact" class="nav-link">
+                <span class="nav-icon">⚙</span>
+                <span>Settings / Contact</span>
+            </a>
+
+            <div class="sidebar-note">
+                <span class="note-icon">✦</span>
+                <strong>Keep learning!</strong>
+                <p>Organize your student records in one place.</p>
+            </div>
         </div>
+    </aside>
 
-        <p id="message" role="status"></p>
+    <!-- MAIN AREA -->
+    <main class="main-area" id="dashboard">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Toggle navigation"
+                    aria-expanded="false"
+                >☰</button>
+
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="topbar-subtitle">
+                        Welcome back! Here's your student overview.
+                    </p>
+                </div>
+            </div>
+
+            
+<div class="admin-profile">
+    <div class="admin-avatar" id="currentAvatar">U</div>
+    <div>
+        <strong id="currentUsername">User</strong>
+        <span id="currentUserRole">User</span>
     </div>
+    <button type="button" id="logoutBtn" class="secondary-button">
+        Logout
+    </button>
+</div>
 
-    <script src="script.js"></script>
+
+        <div class="dashboard-content">
+
+            <!-- PAGE INTRO -->
+            <section class="welcome-banner">
+                <div>
+                    <span class="eyebrow">STUDENT MANAGEMENT SYSTEM</span>
+                    <h2>Manage your students easily.</h2>
+                    <p>View, organize and update your student records.</p>
+                </div>
+
+                <a class="primary-button banner-button" href="#studentForm">
+                    <span>＋</span> Add New Student
+                </a>
+            </section>
+
+            <!-- STATISTIC CARDS -->
+            <section class="stats-grid" aria-label="Student statistics">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Total Students</span>
+                        <span class="stat-icon blue">♙</span>
+                    </div>
+                    <strong class="stat-number" id="totalStudents">0</strong>
+                    <span class="stat-caption">All saved student records</span>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Different Majors</span>
+                        <span class="stat-icon purple">▤</span>
+                    </div>
+                    <strong class="stat-number" id="totalMajors">0</strong>
+                    <span class="stat-caption">Unique majors in your records</span>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Average Age</span>
+                        <span class="stat-icon green">◷</span>
+                    </div>
+                    <strong class="stat-number" id="averageAge">0</strong>
+                    <span class="stat-caption">Based on saved student ages</span>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Search Results</span>
+                        <span class="stat-icon orange">⌕</span>
+                    </div>
+                    <strong class="stat-number" id="searchResults">0</strong>
+                    <span class="stat-caption">Students matching your search</span>
+                </article>
+
+            </section>
+
+            <!-- CHART AND QUICK SUMMARY -->
+            <section class="overview-grid" id="reports">
+
+                <article class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Students by Major</h2>
+                            <p>Distribution of saved student records</p>
+                        </div>
+                        <span class="panel-badge">Overview</span>
+                    </div>
+
+                    <div id="majorChart" class="major-chart">
+                        <p class="empty-chart">
+                            Add students to see your major statistics.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="panel quick-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Quick Actions</h2>
+                            <p>Common tasks</p>
+                        </div>
+                    </div>
+
+                    <a href="#studentForm" class="quick-action">
+                        <span class="quick-icon blue">＋</span>
+                        <span>
+                            <strong>Add a Student</strong>
+                            <small>Create a new student record</small>
+                        </span>
+                        <span class="action-arrow">›</span>
+                    </a>
+
+                    <a href="#search" class="quick-action">
+                        <span class="quick-icon purple">⌕</span>
+                        <span>
+                            <strong>Find a Student</strong>
+                            <small>Search your saved records</small>
+                        </span>
+                        <span class="action-arrow">›</span>
+                    </a>
+
+                    <a href="#contact" class="quick-action">
+                        <span class="quick-icon green">✉</span>
+                        <span>
+                            <strong>Send a Message</strong>
+                            <small>Contact through Telegram</small>
+                        </span>
+                        <span class="action-arrow">›</span>
+                    </a>
+                </article>
+
+            </section>
+
+            <!-- STUDENT MANAGEMENT -->
+            <section class="panel students-panel" id="students">
+
+                <div class="panel-heading students-heading">
+                    <div>
+                        <h2>Student Records</h2>
+                        <p>Manage all your student information here.</p>
+                    </div>
+
+                    <a href="#studentForm" class="primary-button">
+                        ＋ Add Student
+                    </a>
+                </div>
+
+                <!-- ADD / EDIT FORM -->
+                <details class="form-disclosure" id="studentFormSection">
+                    <summary id="formSummary">＋ Add a new student</summary>
+
+                    <form id="studentForm" class="student-form">
+                        <input type="hidden" id="studentId">
+
+                        <div class="field">
+                            <label for="name">Student Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter student name"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="age">Age</label>
+                            <input
+                                type="number"
+                                id="age"
+                                placeholder="Enter age"
+                                min="1"
+                                max="120"
+                                step="1"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="major">Major</label>
+                            <input
+                                type="text"
+                                id="major"
+                                placeholder="Enter major"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-buttons">
+                            <button
+                                type="submit"
+                                id="submitBtn"
+                                class="primary-button"
+                            >
+                                Add Student
+                            </button>
+
+                            <button
+                                type="button"
+                                id="cancelEditBtn"
+                                class="secondary-button"
+                                hidden
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </details>
+
+                <!-- SEARCH -->
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <span aria-hidden="true">⌕</span>
+                        <input
+                            type="search"
+                            id="search"
+                            placeholder="Search by name or major..."
+                            aria-label="Search students"
+                        >
+                    </div>
+
+                    <span id="count" class="results-count">
+                        Showing 0 students
+                    </span>
+                </div>
+
+                <!-- TABLE -->
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Major</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentList"></tbody>
+                    </table>
+                </div>
+
+                <p
+                    id="message"
+                    class="status-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <!-- DATABASE STATUS TEXT -->
+                <div class="table-footer">
+                    <span>
+                        Student records are saved in the online database.
+                    </span>
+                    <a href="#dashboard">Back to top ↑</a>
+                </div>
+
+            </section>
+
+            <!-- CONTACT FORM -->
+            <section class="panel contact-panel" id="contact">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Contact &amp; Messages</h2>
+                        <p>
+                            Send a message to your connected Telegram chat.
+                        </p>
+                    </div>
+
+                    <span class="telegram-label">✉ Telegram</span>
+                </div>
+
+                <form id="contactForm" class="contact-form">
+
+                    <div class="field">
+                        <label for="contactName">Your Name</label>
+                        <input
+                            type="text"
+                            id="contactName"
+                            name="name"
+                            placeholder="Enter your name"
+                            maxlength="100"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="contactMessage">Your Message</label>
+                        <textarea
+                            id="contactMessage"
+                            name="message"
+                            placeholder="Write your message..."
+                            maxlength="2000"
+                            rows="4"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="contact-submit-row">
+                        <button
+                            type="submit"
+                            id="sendBtn"
+                            class="primary-button"
+                        >
+                            Send Message →
+                        </button>
+
+                        <p
+                            id="formStatus"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="page-footer">
+                <span>© 2026 Meng hor</span>
+                <span>Student Management Dashboard</span>
+            </footer>
+
+        </div>
+    </main>
+
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
-<section id="contact">
-  <h2>Contact Me</h2>
-  <p>Send me a message through my website.</p>
-
-  <form id="contactForm">
-    <div>
-      <label for="name">Your Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="Enter your name"
-        maxlength="100"
-        required
-      />
-    </div>
-
-    <div>
-      <label for="message">Your Message</label>
-      <textarea
-        id="message"
-        name="message"
-        placeholder="Write your message..."
-        maxlength="2000"
-        required
-      ></textarea>
-    </div>
-
-    <button type="submit" id="sendBtn">Send Message</button>
-    <p id="formStatus" role="status" aria-live="polite"></p>
-  </form>
-</section>
